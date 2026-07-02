@@ -1,12 +1,15 @@
 
 import './App.css'
+import Movies from './components/movies/Movies'
+import Navbar from './components/shared/Navbar/Navbar'
 
 function App() {
 
 
   return (
     <>
-      <h1 className='text-2xl'>hello</h1>
+      <Navbar/>
+      <Movies/>
     </>
   )
 }
