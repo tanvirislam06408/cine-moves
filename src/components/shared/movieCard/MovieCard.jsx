@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 
-const MovieCard = ({ movie, onToggleWatched }) => {
+const MovieCard = ({ movie, onToggleWatched,onDelete }) => {
     const { id, poster, title, genre, watched, releaseYear } = movie;
 
     return (
@@ -26,7 +26,7 @@ const MovieCard = ({ movie, onToggleWatched }) => {
                         </div>
                     </div>
                     <div className="card-actions flex items-center justify-between">
-                        <MdDeleteForever className='text-xl' />
+                        <MdDeleteForever onClick={()=>onDelete(id)} className='text-xl' />
                         <button onClick={() => onToggleWatched(id)} className="btn btn-primary">
                             {watched ? 'UnWatch' : 'Watch'}
                         </button>

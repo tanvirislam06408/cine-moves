@@ -116,11 +116,18 @@ const Movies = () => {
                 ? unwatchedMovies
                 : movies;
 
+
+    const deleteMovie = (id) => {
+        setMovies(prevMovies =>
+            prevMovies.filter(movie => movie.id !== id)
+        );
+    };
+
     return (
         <div className='container mx-auto mt-10 min-h-screen'>
-            <div className="flex flex-col  md:flex-row-reverse justify-between items-center gap-4 mb-8">
+            <div className="flex flex-col  md:flex-row-reverse justify-between px-7 md:px-0 items-center gap-4 mb-8">
 
-                {/* Stats */}
+
                 <div className="flex gap-4">
 
                     <div className="bg-success text-success-content rounded-xl px-5 py-3 shadow">
@@ -146,7 +153,6 @@ const Movies = () => {
 
                 </div>
 
-                {/* Filter */}
                 <div className="w-full md:w-56">
                     <select
                         className="select select-bordered w-full"
@@ -165,6 +171,7 @@ const Movies = () => {
                     <MovieCard
                         key={movie.id}
                         movie={movie}
+                        onDelete={deleteMovie}
                         onToggleWatched={toggleWatched}
                     />
                 ))}
