@@ -1,128 +1,173 @@
 import React, { useState } from 'react';
 import MovieCard from '../shared/movieCard/MovieCard';
 
+
+const initialMovies = [
+    {
+        id: 1,
+        title: "Interstellar",
+        genre: "Sci-Fi",
+        releaseYear: 2014,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
+    },
+    {
+        id: 2,
+        title: "Inception",
+        genre: "Sci-Fi",
+        releaseYear: 2010,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+    },
+    {
+        id: 3,
+        title: "The Dark Knight",
+        genre: "Action",
+        releaseYear: 2008,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    },
+    {
+        id: 4,
+        title: "Avengers: Endgame",
+        genre: "Superhero",
+        releaseYear: 2019,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+    },
+    {
+        id: 5,
+        title: "Parasite",
+        genre: "Thriller",
+        releaseYear: 2019,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    },
+    {
+        id: 6,
+        title: "The Shawshank Redemption",
+        genre: "Drama",
+        releaseYear: 1994,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    },
+    {
+        id: 7,
+        title: "Joker",
+        genre: "Crime",
+        releaseYear: 2019,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+    },
+    {
+        id: 8,
+        title: "Spider-Man: No Way Home",
+        genre: "Superhero",
+        releaseYear: 2021,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+    },
+    {
+        id: 9,
+        title: "The Matrix",
+        genre: "Sci-Fi",
+        releaseYear: 1999,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    },
+    {
+        id: 10,
+        title: "Oppenheimer",
+        genre: "Biography",
+        releaseYear: 2023,
+        watched: false,
+        poster:
+            "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
+    },
+];
+
 const Movies = () => {
-    const [watchMovie, setWatchMovie] = useState([]);
-    const [notWatchMovie, setNotWatchMovie] = useState([]);
+    const [movies, setMovies] = useState(initialMovies);
+    const [filter, setFilter] = useState('all');
 
+    const toggleWatched = (id) => {
+        setMovies((prevMovies) =>
+            prevMovies.map((movie) =>
+                movie.id === id ? { ...movie, watched: !movie.watched } : movie
+            )
+        );
+    };
 
-    const initialMovies = [
-        {
-            id: 1,
-            title: "Interstellar",
-            genre: "Sci-Fi",
-            releaseYear: 2014,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
-        },
-        {
-            id: 2,
-            title: "Inception",
-            genre: "Sci-Fi",
-            releaseYear: 2010,
-            watched: true,
-            poster:
-                "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-        },
-        {
-            id: 3,
-            title: "The Dark Knight",
-            genre: "Action",
-            releaseYear: 2008,
-            watched: true,
-            poster:
-                "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-        },
-        {
-            id: 4,
-            title: "Avengers: Endgame",
-            genre: "Superhero",
-            releaseYear: 2019,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-        },
-        {
-            id: 5,
-            title: "Parasite",
-            genre: "Thriller",
-            releaseYear: 2019,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
-        },
-        {
-            id: 6,
-            title: "The Shawshank Redemption",
-            genre: "Drama",
-            releaseYear: 1994,
-            watched: true,
-            poster:
-                "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-        },
-        {
-            id: 7,
-            title: "Joker",
-            genre: "Crime",
-            releaseYear: 2019,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
-        },
-        {
-            id: 8,
-            title: "Spider-Man: No Way Home",
-            genre: "Superhero",
-            releaseYear: 2021,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-        },
-        {
-            id: 9,
-            title: "The Matrix",
-            genre: "Sci-Fi",
-            releaseYear: 1999,
-            watched: true,
-            poster:
-                "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-        },
-        {
-            id: 10,
-            title: "Oppenheimer",
-            genre: "Biography",
-            releaseYear: 2023,
-            watched: false,
-            poster:
-                "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
-        },
-    ];
-
-    const watchList = watchMovie;
-
-    const unWatchList = notWatchMovie;
-    console.log('unwatched',unWatchList);
-
-    const isWatchArr = (id) => {
-        const haveToAdd = initialMovies.find(movie => movie.id === id);
-        setWatchMovie(prev => [...prev, haveToAdd]);
-        console.log('watched', watchList);
-    }
-
-
-    const notWatchArr = (id) => {
-        const haveToAdd = initialMovies.find(movie => movie.id === id);
-        setNotWatchMovie(prev => [...prev, haveToAdd]);
-    }
+    const watchedMovies = movies.filter((movie) => movie.watched);
+    const unwatchedMovies = movies.filter((movie) => !movie.watched);
+    const movieData =
+        filter === 'watched'
+            ? watchedMovies
+            : filter === 'unwatched'
+                ? unwatchedMovies
+                : movies;
 
     return (
-        <div className='container mx-auto mt-10'>
-            <p>isWatrch {watchList.length}</p>
+        <div className='container mx-auto mt-10 min-h-screen'>
+            <div className="flex flex-col  md:flex-row-reverse justify-between items-center gap-4 mb-8">
+
+                {/* Stats */}
+                <div className="flex gap-4">
+
+                    <div className="bg-success text-success-content rounded-xl px-5 py-3 shadow">
+                        <p className="text-sm font-medium">Watched</p>
+                        <h2 className="text-2xl font-bold">
+                            {watchedMovies.length}
+                        </h2>
+                    </div>
+
+                    <div className="bg-warning text-warning-content rounded-xl px-5 py-3 shadow">
+                        <p className="text-sm font-medium">Unwatched</p>
+                        <h2 className="text-2xl font-bold">
+                            {unwatchedMovies.length}
+                        </h2>
+                    </div>
+
+                    <div className="bg-primary text-primary-content rounded-xl px-5 py-3 shadow">
+                        <p className="text-sm font-medium">Total</p>
+                        <h2 className="text-2xl font-bold">
+                            {movies.length}
+                        </h2>
+                    </div>
+
+                </div>
+
+                {/* Filter */}
+                <div className="w-full md:w-56">
+                    <select
+                        className="select select-bordered w-full"
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
+                        <option value="all">All Movies</option>
+                        <option value="watched">Watched</option>
+                        <option value="unwatched">Unwatched</option>
+                    </select>
+                </div>
+
+            </div>
             <div className='grid md:grid-cols-2 grid-cols-1 lg:grid-cols-4 gap-2.5 px-2.5 md:px-0'>
-                {
-                initialMovies.map(movie => <MovieCard notWatchArr={notWatchArr} isWatchArr={isWatchArr} key={movie.id} movie={movie} />)
-                }
+                {movieData.map((movie) => (
+                    <MovieCard
+                        key={movie.id}
+                        movie={movie}
+                        onToggleWatched={toggleWatched}
+                    />
+                ))}
             </div>
         </div>
     );

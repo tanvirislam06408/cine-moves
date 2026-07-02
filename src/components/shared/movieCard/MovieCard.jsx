@@ -1,28 +1,9 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 
-const MovieCard = ({ notWatchArr, movie, isWatchArr }) => {
-
+const MovieCard = ({ movie, onToggleWatched }) => {
     const { id, poster, title, genre, watched, releaseYear } = movie;
-    const [isWatch, setIsWatch] = useState(watched);
 
-
-    const handleChangeWatchState = (movieId) => {
-
-
-        setIsWatch(!isWatch)
-        if (!isWatch) {
-            console.log(movieId);
-
-            return isWatchArr(movieId);
-        }
-        else{
-            notWatchArr(movieId)
-        } 
-            
-
-    }
     return (
         <div>
             <div className="card h-full bg-base-100 shadow-sm p-2.5 border border-gray-200">
@@ -30,7 +11,8 @@ const MovieCard = ({ notWatchArr, movie, isWatchArr }) => {
                     <img
                         className='h-full w-full object-cover group transition-transform duration-500 ease-in-out hover:scale-105'
                         src={poster}
-                        alt={title} />
+                        alt={title}
+                    />
                 </figure>
 
                 <div className="card-body">
@@ -45,9 +27,9 @@ const MovieCard = ({ notWatchArr, movie, isWatchArr }) => {
                     </div>
                     <div className="card-actions flex items-center justify-between">
                         <MdDeleteForever className='text-xl' />
-                        {
-                            isWatch ? <button onClick={() => handleChangeWatchState(id)} className="btn btn-primary">UnWatch</button> : <button onClick={() => handleChangeWatchState(id)} className="btn btn-primary">Watch</button>
-                        }
+                        <button onClick={() => onToggleWatched(id)} className="btn btn-primary">
+                            {watched ? 'UnWatch' : 'Watch'}
+                        </button>
                     </div>
                 </div>
             </div>
