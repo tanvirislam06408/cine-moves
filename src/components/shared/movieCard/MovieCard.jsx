@@ -1,11 +1,28 @@
-import React from 'react';
-import { FaRegBookmark } from 'react-icons/fa';
+import React, { useState } from 'react';
+
 import { MdDeleteForever } from 'react-icons/md';
 
-const MovieCard = ({ movie }) => {
-    console.log(movie);
-    const { id, poster, title, genre,watched,releaseYear } = movie;
+const MovieCard = ({ notWatchArr, movie, isWatchArr }) => {
 
+    const { id, poster, title, genre, watched, releaseYear } = movie;
+    const [isWatch, setIsWatch] = useState(watched);
+
+
+    const handleChangeWatchState = (movieId) => {
+
+
+        setIsWatch(!isWatch)
+        if (!isWatch) {
+            console.log(movieId);
+
+            return isWatchArr(movieId);
+        }
+        else{
+            notWatchArr(movieId)
+        } 
+            
+
+    }
     return (
         <div>
             <div className="card h-full bg-base-100 shadow-sm p-2.5 border border-gray-200">
@@ -29,7 +46,7 @@ const MovieCard = ({ movie }) => {
                     <div className="card-actions flex items-center justify-between">
                         <MdDeleteForever className='text-xl' />
                         {
-                            watched ? <button className="btn btn-primary">Watch</button> : <button className="btn btn-primary">Watch</button>
+                            isWatch ? <button onClick={() => handleChangeWatchState(id)} className="btn btn-primary">UnWatch</button> : <button onClick={() => handleChangeWatchState(id)} className="btn btn-primary">Watch</button>
                         }
                     </div>
                 </div>

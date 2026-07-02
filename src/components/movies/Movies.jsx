@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MovieCard from '../shared/movieCard/MovieCard';
 
 const Movies = () => {
+    const [watchMovie, setWatchMovie] = useState([]);
+    const [notWatchMovie, setNotWatchMovie] = useState([]);
+
+
     const initialMovies = [
         {
             id: 1,
@@ -95,12 +99,29 @@ const Movies = () => {
         },
     ];
 
+    const watchList = watchMovie;
+
+    const unWatchList = notWatchMovie;
+    console.log('unwatched',unWatchList);
+
+    const isWatchArr = (id) => {
+        const haveToAdd = initialMovies.find(movie => movie.id === id);
+        setWatchMovie(prev => [...prev, haveToAdd]);
+        console.log('watched', watchList);
+    }
+
+
+    const notWatchArr = (id) => {
+        const haveToAdd = initialMovies.find(movie => movie.id === id);
+        setNotWatchMovie(prev => [...prev, haveToAdd]);
+    }
 
     return (
         <div className='container mx-auto mt-10'>
+            <p>isWatrch {watchList.length}</p>
             <div className='grid md:grid-cols-2 grid-cols-1 lg:grid-cols-4 gap-2.5 px-2.5 md:px-0'>
                 {
-                    initialMovies.map(movie => <MovieCard key={movie.id} movie={movie} />)
+                initialMovies.map(movie => <MovieCard notWatchArr={notWatchArr} isWatchArr={isWatchArr} key={movie.id} movie={movie} />)
                 }
             </div>
         </div>
