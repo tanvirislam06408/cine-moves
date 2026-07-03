@@ -1,6 +1,7 @@
 # Cine-Moves
 
-![App Screenshot]()
+<img width="1672" height="897" alt="Screenshot from 2026-07-03 07-30-03" src="https://github.com/user-attachments/assets/625cc8be-7e0e-442b-a880-4c813211f09b" />
+
 
 A personal movie watchlist manager built with React. Browse pre-populated movies, add new ones, toggle watched/unwatched status, search, filter, and delete movies with confirmation dialogs.
 
