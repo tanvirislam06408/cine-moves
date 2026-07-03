@@ -1,4 +1,4 @@
-# Cine-Moves
+# Cine-Movies
 
 <img width="1672" height="897" alt="Screenshot from 2026-07-03 07-30-03" src="https://github.com/user-attachments/assets/625cc8be-7e0e-442b-a880-4c813211f09b" />
 
