@@ -1,21 +1,23 @@
 import React from 'react';
 import { IoMdAddCircle } from 'react-icons/io';
-
+import {
+  FaFilm,
+  FaTags,
+  FaCalendarAlt,
+  FaImage,
+} from "react-icons/fa";
 const Modal = ({ onAddMovie }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const title = form.title.value.trim();
-        const genre = form.genre.value.trim();
-        const releaseYear = Number(form.releaseYear.value);
-        const poster = form.poster.value.trim();
+        const formData=new FormData(form);
+        const data=Object.fromEntries(formData.entries());
+        console.log(data);
+        
 
         const newMovie = {
             id: Date.now(),
-            title,
-            genre,
-            releaseYear,
-            poster,
+            ...data,
             watched: false,
         };
 
@@ -34,72 +36,125 @@ const Modal = ({ onAddMovie }) => {
             </button>
 
             <dialog id="add_movie_modal" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg mb-6">Add New Movie</h3>
-                    <form onSubmit={handleSubmit}>
-                        <label className="form-control w-full mb-4">
-                            <div className="label">
-                                <span className="label-text">Title</span>
-                            </div>
-                            <input
-                                type="text"
-                                name="title"
-                                placeholder="Enter movie title"
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </label>
+  <div className="modal-box max-w-2xl">
 
-                        <label className="form-control w-full mb-4">
-                            <div className="label">
-                                <span className="label-text">Genre</span>
-                            </div>
-                            <input
-                                type="text"
-                                name="genre"
-                                placeholder="e.g. Action, Sci-Fi"
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </label>
+    {/* Header */}
+    <div className="flex items-center gap-3 mb-8">
+      <div className="bg-primary/10 p-3 rounded-xl">
+        <FaFilm className="text-2xl text-primary" />
+      </div>
 
-                        <label className="form-control w-full mb-4">
-                            <div className="label">
-                                <span className="label-text">Release Year</span>
-                            </div>
-                            <input
-                                type="number"
-                                name="releaseYear"
-                                placeholder="e.g. 2024"
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </label>
+      <div>
+        <h3 className="text-2xl font-bold">
+          Add New Movie
+        </h3>
+        <p className="text-sm opacity-70">
+          Fill in the details below to add a movie to your watchlist.
+        </p>
+      </div>
+    </div>
 
-                        <label className="form-control w-full mb-6">
-                            <div className="label">
-                                <span className="label-text">Poster URL</span>
-                            </div>
-                            <input
-                                type="url"
-                                name="poster"
-                                placeholder="https://image.tmdb.org/t/p/w500/..."
-                                className="input input-bordered w-full"
-                                required
-                            />
-                        </label>
+    <form onSubmit={handleSubmit} className="space-y-5">
 
-                        <div className="modal-action">
-                            <button type="button" className="btn" onClick={() => document.getElementById('add_movie_modal').close()}>
-                                Cancel
-                            </button>
-                            <button type="submit" className="btn btn-primary">
-                                Add Movie
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </dialog>
+      {/* Title */}
+      <div>
+        <label className="label">
+          <span className="label-text flex items-center gap-2">
+            <FaFilm className="text-primary" />
+            Movie Title
+          </span>
+        </label>
+
+        <input
+          type="text"
+          name="title"
+          placeholder="Interstellar"
+          className="input input-bordered w-full"
+          required
+        />
+      </div>
+
+      {/* Genre & Year */}
+      <div className="grid md:grid-cols-2 gap-4">
+
+        <div>
+          <label className="label">
+            <span className="label-text flex items-center gap-2">
+              <FaTags className="text-primary" />
+              Genre
+            </span>
+          </label>
+
+          <input
+            type="text"
+            name="genre"
+            placeholder="Sci-Fi"
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="label">
+            <span className="label-text flex items-center gap-2">
+              <FaCalendarAlt className="text-primary" />
+              Release Year
+            </span>
+          </label>
+
+          <input
+            type="number"
+            name="releaseYear"
+            placeholder="2024"
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
+      </div>
+
+      {/* Poster */}
+      <div>
+        <label className="label">
+          <span className="label-text flex items-center gap-2">
+            <FaImage className="text-primary" />
+            Poster URL
+          </span>
+        </label>
+
+        <input
+          type="url"
+          name="poster"
+          placeholder="https://image.tmdb.org/..."
+          className="input input-bordered w-full"
+          required
+        />
+      </div>
+
+      {/* Buttons */}
+      <div className="modal-action mt-8">
+
+        <button
+          type="button"
+          className="btn btn-outline"
+          onClick={() =>
+            document.getElementById("add_movie_modal").close()
+          }
+        >
+          Cancel
+        </button>
+
+        <button type="submit" className="btn btn-primary gap-2">
+          <IoMdAddCircle className="text-xl" />
+          Add Movie
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</dialog>
         </div>
     );
 };
